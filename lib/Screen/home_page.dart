@@ -1,14 +1,12 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:post_api_demo/Controller/userdata_controller.dart';
 import 'package:sizer/sizer.dart';
 
-import 'design_page.dart';
-
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-  UserController _userController = Get.find<UserController>();
+  UserController _userController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,13 +39,16 @@ class HomePage extends StatelessWidget {
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.search),
                         isDense: true,
-                        border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(3.w))),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(3.w))),
                         filled: true,
                         hintText: "Search Name",
                       ),
                       validator: (value) {
                         String patttern = '[a-zA-Z]';
-                        if (value!.isEmpty || !RegExp(patttern).hasMatch(value)) {
+                        if (value!.isEmpty ||
+                            !RegExp(patttern).hasMatch(value)) {
                           return 'Please Enter valid Name';
                         }
                         return null;

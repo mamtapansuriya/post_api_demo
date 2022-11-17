@@ -9,7 +9,9 @@ import 'package:sizer/sizer.dart';
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -27,8 +29,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return GetMaterialApp(
+        initialBinding: AppBidding(),
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.homePage,
+        initialRoute: AppRoutes.welcomeScreen,
         getPages: AppRoutes.pages,
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -36,5 +39,12 @@ class MyApp extends StatelessWidget {
         ),
       );
     });
+  }
+}
+
+class AppBidding implements Bindings {
+  @override
+  void dependencies() {
+    Get.put(UserController());
   }
 }
